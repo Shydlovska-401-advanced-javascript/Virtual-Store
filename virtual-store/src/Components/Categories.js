@@ -2,20 +2,40 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { change } from '../Store/Catgories.js'
 
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) => ({
+    categories: {
+      margin: theme.spacing(3),
+    },
+  }));
+
 function Categories(props){
-    console.log(props)
-    return(
-        <section>
-        <h1>{props.activeCategory ? props.activeCategory : "Please select the category"}</h1>
-        <ul>
-            {props.categories.map(category =>
-                <li onClick={() => props.change(category.normalizedName)} key={category.normalizedName}>{category.normalizedName}</li> )}
-        </ul>
 
+  const classes = useStyles();
 
-        </section>
-    )
+  return (
+    <div className={classes.categories}>
+      <Typography variant="h5">Browse our Categories</Typography>
+      <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+      {props.categories.map(category =>
+          <Button
+            // key={cat._id}
+            color="primary"
+            onClick={() => props.change(category.normalizedName)} key={category.normalizedName}
+          >
+           {category.normalizedName}
+          </Button>
+        )}
+      </ButtonGroup>
+    </div>
+  );
 }
+
 
 const mapDispatchToProps = {
     change

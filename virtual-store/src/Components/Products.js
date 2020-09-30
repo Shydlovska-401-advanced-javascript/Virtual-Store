@@ -1,21 +1,83 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { addToCart } from '../Store/SimpleCart.js'
+
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) => ({
+    cardGrid: {
+      paddingTop: theme.spacing(8),
+      paddingBottom: theme.spacing(8),
+    },
+    card: {
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    cardMedia: {
+      paddingTop: '56.25%', // 16:9
+    },
+    cardContent: {
+      flexGrow: 1,
+    },
+  }));
 
  function Products(props){
-    // console.log(props, "products!!!!!!!!S");
+
+    const classes = useStyles();
+    
     return (
-   <section>
-       <ul>
-       {props.activeCategory ? props.displayProducts.map(product =>
-                <li>{product.name}, {product.price}, {product.count}</li> ) : props.allProducts.map(product =>
-                    <li>{product.name}</li> )}
-           
-       </ul>
-   </section>
-    )
+<>
+      <Container className={classes.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {props.displayProducts.map(product => (
+            <Grid item key={product.name} xs={12} sm={6} md={4}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image={`https://source.unsplash.com/random?${product.name}`}
+                  title={product.name}
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {product.name}
+                  </Typography>
+                  <Typography>
+                    {product.description}
+                  </Typography>
+                  <Typography>
+                    {product.price}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" color="primary" onClick={() => props.addToCart(product)}>
+                    Add To Cart
+                  </Button>
+                  <Button size="small" color="primary">
+                    View Details
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </>
+  );
 }
 
-
+const mapDispatchToProps = {
+    addToCart
+  }
 
 const mapStateToPops = (state) => {
     console.log(state, "state");
@@ -27,4 +89,4 @@ const mapStateToPops = (state) => {
 }
 
 
-export default connect(mapStateToPops)(Products);
+export default connect(mapStateToPops, mapDispatchToProps)(Products);

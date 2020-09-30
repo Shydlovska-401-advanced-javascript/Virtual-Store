@@ -2,7 +2,7 @@ const initialState = {
     categories:[
         {normalizedName: 'electronics', displayName:'categ  name', description: 'electronics '},
         {normalizedName: 'food', displayName:'categ name', description: 'description',},
-        {normalizedName: 'accserises', displayName:'product name', description: 'description'},
+        {normalizedName: 'accessories', displayName:'product name', description: 'description'},
         {normalizedName: 'books', displayName:'categ name', description: 'categ'},
     ],
     activeCategory: null,
