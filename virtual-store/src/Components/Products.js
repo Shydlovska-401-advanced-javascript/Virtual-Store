@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { addToCart } from '../Store/SimpleCart.js'
+
+import { getData } from '../Store/Products.js'
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -34,11 +36,20 @@ const useStyles = makeStyles((theme) => ({
  function Products(props){
 
     const classes = useStyles();
+
+    useEffect(() => {
+      console.log('gataaaaaaaaaaaaaaaa')
+     props.getData()
+    },[props])
     
     return (
 <>
       <Container className={classes.cardGrid} maxWidth="md">
+      {/* {props.loading ?
+        <p>Loading...</p>
+      : */}
         <Grid container spacing={4}>
+      
           {props.displayProducts.map(product => (
             <Grid item key={product.name} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
@@ -76,7 +87,8 @@ const useStyles = makeStyles((theme) => ({
 }
 
 const mapDispatchToProps = {
-    addToCart
+    addToCart,
+    getData
   }
 
 const mapStateToPops = (state) => {

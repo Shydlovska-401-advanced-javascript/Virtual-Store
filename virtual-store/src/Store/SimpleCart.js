@@ -1,3 +1,11 @@
+// import thunk from 'redux-thunk';
+// import axios from 'axios';
+
+
+//let stuffFromDatabase => call to database
+
+
+
 const initialState = {
     products: [],
     total: 0,
@@ -12,6 +20,11 @@ export default (state = initialState, action) =>{
 
 
     switch(type) {
+        // case 'GET':
+        // return async function (dispatch) {
+        //     const response = await axios.get('https://api-js401.herokuapp.com/api/v1/products');
+        //     dispatch({ type: 'GET', payload: response.data})
+        // }
         case 'ADD':
             total = state.total + 1;
             products = state.products;
@@ -28,6 +41,13 @@ export default (state = initialState, action) =>{
    
 }
 
+
+// export const getData = (results) =>{
+//   return{
+//       type: "GET",
+//       payload: results
+//   }
+// }
 
 export const addToCart = (product) => {
     return {

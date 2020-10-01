@@ -1,11 +1,8 @@
+import axios from 'axios';
+
 const initialState = {
-    categories:[
-        {normalizedName: 'electronics', displayName:'categ  name', description: 'electronics '},
-        {normalizedName: 'food', displayName:'categ name', description: 'description',},
-        {normalizedName: 'accessories', displayName:'product name', description: 'description'},
-        {normalizedName: 'books', displayName:'categ name', description: 'categ'},
-    ],
-    activeCategory: null,
+    categories:[],
+    activeCategory: '',
 }
 
 export default (state = initialState, action) => {
@@ -14,6 +11,11 @@ export default (state = initialState, action) => {
 
   
     switch (type) {
+
+    case 'UPDATE_CATEGORIES':
+
+    return {...state, categories: payload}
+
     case 'CHANGE':
   
     let activeCategory = payload;
@@ -32,3 +34,16 @@ export default (state = initialState, action) => {
       payload: category,
     };
   };
+
+
+ export function getCategories(){
+    return async function( dispatch){
+      const response = await axios.get('https://api-js401.herokuapp.com/api/v1/categories')
+      // console.log(response, 'results here')
+      dispatch({
+        type: 'UPDATE_CATEGORIES',
+        payload: response.data.results
+      })
+    }
+  }
+

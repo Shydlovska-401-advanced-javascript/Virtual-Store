@@ -1,6 +1,6 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import { connect } from 'react-redux';
-import { change } from '../Store/Catgories.js'
+import { change, getCategories } from '../Store/Catgories.js'
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -18,6 +18,10 @@ function Categories(props){
 
   const classes = useStyles();
 
+  useEffect(() =>{
+    props.getCategories()
+  }, [props])
+
   return (
     <div className={classes.categories}>
       <Typography variant="h5">Browse our Categories</Typography>
@@ -26,9 +30,9 @@ function Categories(props){
           <Button
             // key={cat._id}
             color="primary"
-            onClick={() => props.change(category.normalizedName)} key={category.normalizedName}
+            onClick={() => props.change(category.name)} key={category.name}
           >
-           {category.normalizedName}
+           {category.name}
           </Button>
         )}
       </ButtonGroup>
@@ -38,7 +42,8 @@ function Categories(props){
 
 
 const mapDispatchToProps = {
-    change
+    change,
+    getCategories
   }
 const mapStateToPops = (state) => {
     console.log(state, "state");
