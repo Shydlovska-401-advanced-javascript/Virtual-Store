@@ -1,9 +1,25 @@
-import React from 'react';
+import React from "react";
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
-export default function Footer(){
-    return (
-   <footer>
-       <h1>Footer here!!!</h1>
-   </footer>
-    )
+const useStyles = makeStyles((theme) => ({
+  footer: {
+    backgroundColor: '#eee',
+    padding: theme.spacing(6),
+  },
+}));
+
+const Footer = props => {
+
+  const classes = useStyles();
+
+  return (
+    <footer className={classes.footer}>
+    <Typography variant="h6" align="center" gutterBottom>
+      &copy; 2020 Javascript 401
+      </Typography>
+  </footer>
+  );
 }
+
+export default Footer;
