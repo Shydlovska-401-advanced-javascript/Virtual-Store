@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
             Cart: {props.total}
         </Button>
         <ul>
-        {props.products.map(product => <li >{product.product.name} <span onClick={(()=>props.deleteFromCart(product) )}> x</span></li>)}
+        {props.products.map(product => <li >{product.product.name} in stock: {product.product.inStock} <span onClick={(()=>props.deleteFromCart(product) )}> x</span></li>)}
         </ul>
         </>
     )
@@ -22,7 +22,7 @@ const mapDispatchToProps = {
   }
 
 const mapStateToPops = (state) => {
-    console.log(state, "cart");
+    // console.log(state, "cart");
     return{
       total: state.cart.total,
       products: state.cart.products,

@@ -46,7 +46,7 @@ const mapDispatchToProps = {
     getCategories
   }
 const mapStateToPops = (state) => {
-    console.log(state, "state");
+    // console.log(state, "state");
     return{
       activeCategory: state.categories.activeCategory,
       categories: state.categories.categories

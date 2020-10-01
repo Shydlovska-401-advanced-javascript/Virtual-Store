@@ -21,7 +21,7 @@ export default (state = initialState, action) =>{
         return{...state, products: payload }
 
         case 'CHANGE':
-            console.log(state, 'hshshshhs')
+            // console.log(state, 'hshshshhs')
     let displayProducts = state.products.filter(product => {
         return product.category === payload;
     })
@@ -34,11 +34,11 @@ export default (state = initialState, action) =>{
 }
 
 export const getData = () =>{
-    console.log('response  ')
+    // console.log('response  ')
     return async function (dispatch) {
       
         const response = await axios.get('https://api-js401.herokuapp.com/api/v1/products');
-        console.log(response, 'response  for products here')
+        // console.log(response, 'response  for products here')
         
         dispatch({ 
         type: "GET",

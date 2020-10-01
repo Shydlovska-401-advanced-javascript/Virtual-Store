@@ -1,10 +1,5 @@
 // import thunk from 'redux-thunk';
-// import axios from 'axios';
-
-
-//let stuffFromDatabase => call to database
-
-
+import axios from 'axios';
 
 const initialState = {
     products: [],
@@ -20,12 +15,8 @@ export default (state = initialState, action) =>{
 
 
     switch(type) {
-        // case 'GET':
-        // return async function (dispatch) {
-        //     const response = await axios.get('https://api-js401.herokuapp.com/api/v1/products');
-        //     dispatch({ type: 'GET', payload: response.data})
-        // }
         case 'ADD':
+            console.log(payload)
             total = state.total + 1;
             products = state.products;
             products.push({product: payload, id: id});
@@ -42,20 +33,37 @@ export default (state = initialState, action) =>{
 }
 
 
-// export const getData = (results) =>{
-//   return{
-//       type: "GET",
-//       payload: results
-//   }
-// }
 
 export const addToCart = (product) => {
-    return {
+    return async function( dispatch){
+        product.inStock = product.inStock - 1 
+    // console.log(product, 'product')
+    const response = await axios.put(`https://api-js401.herokuapp.com/api/v1/products/${product._id}`, product);
+    console.log(response, 'results here')
+    dispatch({
         type: 'ADD',
-        payload: product,
+        payload: response.data,
       
-    };
+    })
   };
+}
+
+
+
+// export const deleteFromCart = (product) => {
+//     return async function( dispatch){
+//         product.inStock = product.inStock +1;
+//     // console.log(product, 'product')
+//     const response = await axios.put(`https://api-js401.herokuapp.com/api/v1/products/${product._id}`, product);
+//     console.log(response, 'results here')
+//     dispatch({
+//         type: 'DELETE',
+//         payload: response.data,
+      
+//     })
+//   };
+// }
+
 
 export const deleteFromCart = (product) => {
     return {

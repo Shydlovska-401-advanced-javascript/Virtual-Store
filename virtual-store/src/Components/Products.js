@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     const classes = useStyles();
 
     useEffect(() => {
-      console.log('gataaaaaaaaaaaaaaaa')
+      // console.log('gataaaaaaaaaaaaaaaa')
      props.getData()
     },[props])
     
@@ -92,7 +92,7 @@ const mapDispatchToProps = {
   }
 
 const mapStateToPops = (state) => {
-    console.log(state, "state");
+    // console.log(state, "state");
     return{
       activeCategory: state.categories.activeCategory,
       displayProducts: state.products.displayProducts,
